@@ -49,6 +49,22 @@ function showTwit(twit) {
 		};
 	});
 }
-let data = loadData('https://neto-api.herokuapp.com/twitter/jsonp')
+let data = loadData('https://neto-api.herokuapp.com/twitter')
 	.then(showTwit);
-	
+/*
+var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+
+var xhr = new XHR();
+
+xhr.open('GET', ' https://neto-api.herokuapp.com/twitter/json', true);
+xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
+
+xhr.onload = function() {
+  alert(this.target.responseText );
+}
+
+xhr.onerror = function() {
+  alert( 'Ошибка ' + this.status );
+}
+
+xhr.send();*/
