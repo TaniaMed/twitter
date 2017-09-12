@@ -3,16 +3,18 @@
 function randName() {
 	return 'fun'+ Math.ceil(Math.random() * 10);
 }
-function loadData(url) {
-	const functionName = randName();
+
+let functionName = randName();
+function loadData(url) {	
 	return new Promise((done, fail) => {
 		window[functionName] = done;
 
-		const script = document.scripts[0].cloneNode();
+		const script = document.createElement('script');
 		script.src = `${url}?jsonp=${functionName}`;
 		document.body.appendChild(script);
 	})
 };
+
 const imgAll = document.getElementsByTagName('img');
 const h3All = document.getElementsByTagName('h3');
 const pAll = document.getElementsByTagName('p');
@@ -45,26 +47,9 @@ function showTwit(twit) {
 			output.innerHTML = twit.followers;
 		};
 		if (output.hasAttribute('data-following')) {
-			output.innerHTML = twit.followers;
+			output.innerHTML = twit.following;
 		};
 	});
 }
-let data = loadData('https://neto-api.herokuapp.com/twitter')
+let data = loadData('https://neto-api.herokuapp.com/twitter/jsonp')
 	.then(showTwit);
-/*
-var XHR = ("onload" in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
-
-var xhr = new XHR();
-
-xhr.open('GET', ' https://neto-api.herokuapp.com/twitter/json', true);
-xhr.setRequestHeader('Access-Control-Allow-Origin', '*');
-
-xhr.onload = function() {
-  alert(this.target.responseText );
-}
-
-xhr.onerror = function() {
-  alert( 'Ошибка ' + this.status );
-}
-
-xhr.send();*/
